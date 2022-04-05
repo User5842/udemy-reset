@@ -1,8 +1,20 @@
 {
   "action": {
-    "default_popup": "index.html"
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "/images/pencil.ico",
+      "32": "/images/pencil.ico",
+      "48": "/images/pencil.ico",
+      "128": "/images/pencil.ico"
+    }
   },
   "description": "Reset Udemy Curriculum Progress",
+  "icons": {
+    "16": "/images/pencil.ico",
+    "32": "/images/pencil.ico",
+    "48": "/images/pencil.ico",
+    "128": "/images/pencil.ico"
+  },
   "manifest_version": 3,
   "name": "Udemy Reset",
   "permissions": ["activeTab", "scripting", "storage"],

@@ -5,7 +5,7 @@
   "main": "popup.js",
   "scripts": {
     "build": "npm run lint && webpack --mode production && npm run copy",
-    "copy": "copyfiles -u 1 ./src/manifest.json ./dist",
+    "copy": "copyfiles -u 1 ./src/manifest.json ./src/images/*.ico ./dist",
     "lint": "eslint . --ext .ts"
   },
   "keywords": [],
