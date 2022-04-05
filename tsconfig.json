@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "module": "es6",
+    "moduleResolution": "node",
+    "outDir": "./built",
+    "noImplicitAny": true,
+    "strict": true,
+    "target": "es5"
+  },
+  "include": ["./src/**/*"]
+}

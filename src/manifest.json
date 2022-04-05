@@ -1,6 +1,6 @@
 {
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "index.html"
   },
   "description": "Reset Udemy Curriculum Progress",
   "manifest_version": 3,
