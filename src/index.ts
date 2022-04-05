@@ -24,9 +24,15 @@ function resetUdemyCurriculumProgress() {
   /**
    * Get all of the individual sections inside of the Course Content pane.
    */
-  const sections = document
-    .querySelector(udemyPage.courseContent)
-    ?.querySelectorAll(udemyPage.section) as NodeListOf<HTMLDivElement>;
+  let sections;
+
+  try {
+    sections = document
+      .querySelector(udemyPage.courseContent)
+      ?.querySelectorAll(udemyPage.section) as NodeListOf<HTMLDivElement>;
+  } catch {
+    throw new Error("Did you make sure to open the course content panel?");
+  }
 
   sections?.forEach((section) => {
     /**
