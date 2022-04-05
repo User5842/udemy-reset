@@ -1,0 +1,10 @@
+{
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "description": "Reset Udemy Curriculum Progress",
+  "manifest_version": 3,
+  "name": "Udemy Reset",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "version": "1.0"
+}
