@@ -1,4 +1,5 @@
 import "./styles/index.css";
+import { udemyPage } from "./utils/constants";
 
 let resetProgress = document.getElementById("reset") as HTMLButtonElement;
 
@@ -14,65 +15,47 @@ resetProgress.addEventListener("click", async () => {
 });
 
 function resetUdemyCurriculumProgress() {
-  const udemyPage = {
-    checkbox: "[data-type='checkbox']",
-    checked: "data-checked",
-    curriculum: "[data-purpose='curriculum-section-container']",
-    lessons: ".unstyled-list",
-    lessonProgress: "[data-purpose='progress-toggle-button']",
-    panel: "[data-css-toggle-id]",
-  };
+  /**
+   * Get all of the individual sections inside of the Course Content pane.
+   */
+  const sections = document
+    .querySelector(udemyPage.courseContent)
+    ?.querySelectorAll(udemyPage.section) as NodeListOf<HTMLDivElement>;
 
-  function getLessonList(module: HTMLDivElement) {
-    const { childNodes } = module.querySelector(
-      udemyPage.lessons
-    ) as HTMLDivElement;
-    return childNodes;
-  }
+  sections?.forEach((section) => {
+    /**
+     * Check if the individual panel is open/closed.
+     */
+    const sectionPanel = section.previousSibling as HTMLSpanElement;
+    const sectionPanelOpen =
+      sectionPanel.getAttribute(udemyPage.checked) === "checked";
 
-  function getModules() {
-    const { childNodes } = document.querySelector(
-      udemyPage.curriculum
-    ) as HTMLDivElement;
-    return childNodes;
-  }
-
-  function getModuleData(module: HTMLDivElement) {
-    return {
-      sectionCheckbox: module.querySelector(
-        udemyPage.checkbox
-      ) as HTMLSpanElement,
-      sectionPanel: module.querySelector(udemyPage.panel) as HTMLDivElement,
-    };
-  }
-
-  function isModuleOpen(panel: HTMLSpanElement) {
-    return panel.getAttribute(udemyPage.checked) === "checked";
-  }
-
-  // TODO: Look up error handling for the case no selector exists
-  const lessonModules = getModules();
-
-  lessonModules.forEach((module) => {
-    const { sectionCheckbox, sectionPanel } = getModuleData(
-      <HTMLDivElement>module
-    );
-
-    if (!isModuleOpen(sectionCheckbox)) {
-      sectionPanel.click();
+    /**
+     * If the panel is closed, open it.
+     */
+    if (!sectionPanelOpen) {
+      section.click();
     }
 
-    const lessonList = getLessonList(
-      <HTMLDivElement>module
-    ) as NodeListOf<HTMLLIElement>;
+    /**
+     * Get the individual lessons inside of each section.
+     */
+    const lessons = section
+      .closest("[data-purpose]")
+      ?.querySelector(udemyPage.lessons)
+      ?.childNodes as NodeListOf<HTMLLIElement>;
 
-    lessonList.forEach((lesson) => {
-      const button = lesson.querySelector(
+    /**
+     * For each lesson, check if the completion button is checked. If it is,
+     * un-check it.
+     */
+    lessons.forEach((lesson) => {
+      const completionButton = lesson.querySelector(
         udemyPage.lessonProgress
       ) as HTMLInputElement;
 
-      if (button.checked) {
-        button.click();
+      if (completionButton.checked) {
+        completionButton.click();
       }
     });
   });
