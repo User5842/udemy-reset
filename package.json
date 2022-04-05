@@ -4,19 +4,23 @@
   "description": "Reset Udemy Curriculum Progress",
   "main": "popup.js",
   "scripts": {
-    "build": "webpack --mode production && npm run copy",
-    "copy": "copyfiles -u 1 ./src/manifest.json ./dist"
+    "build": "npm run lint && webpack --mode production && npm run copy",
+    "copy": "copyfiles -u 1 ./src/manifest.json ./dist",
+    "lint": "eslint . --ext .ts"
   },
   "keywords": [],
   "author": "Rafael Negron",
   "license": "ISC",
   "devDependencies": {
     "@types/chrome": "^0.0.180",
+    "@typescript-eslint/eslint-plugin": "^5.18.0",
+    "@typescript-eslint/parser": "^5.18.0",
     "autoprefixer": "^10.4.4",
     "clean-webpack-plugin": "^4.0.0",
     "copyfiles": "^2.4.1",
     "css-loader": "^6.7.1",
     "cssnano": "^5.1.7",
+    "eslint": "^8.12.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.0",
     "postcss-loader": "^6.2.1",

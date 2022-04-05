@@ -1,17 +1,23 @@
 import "./styles/index.css";
 import { udemyPage } from "./utils/constants";
 
-let resetProgress = document.getElementById("reset") as HTMLButtonElement;
+const resetProgress = document.getElementById("reset") as HTMLButtonElement;
 
-resetProgress.addEventListener("click", async () => {
-  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-  const tabId = tab.id as number;
-
-  chrome.scripting.executeScript({
-    target: { tabId },
-    func: resetUdemyCurriculumProgress,
-  });
+resetProgress.addEventListener("click", () => {
+  chrome.tabs
+    .query({ active: true, currentWindow: true })
+    .then(([tab]) => tab.id as number)
+    .then((tabId) => {
+      chrome.scripting
+        .executeScript({
+          target: { tabId },
+          func: resetUdemyCurriculumProgress,
+        })
+        .catch((error) => {
+          throw error;
+        });
+    })
+    .catch(console.error);
 });
 
 function resetUdemyCurriculumProgress() {
