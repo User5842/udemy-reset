@@ -75,5 +75,10 @@ function resetUdemyCurriculumProgress() {
         completionButton.click();
       }
     });
+
+    /**
+     * Close all open panels.
+     */
+    section.click();
   });
 }
