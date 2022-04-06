@@ -8,6 +8,12 @@
       "128": "/images/pencil.ico"
     }
   },
+  "content_scripts": [
+    {
+      "matches": ["http://*.udemy.com/*"],
+      "js": ["main.js"]
+    }
+  ],
   "description": "Reset Udemy Curriculum Progress",
   "icons": {
     "16": "/images/pencil.ico",
@@ -17,6 +23,6 @@
   },
   "manifest_version": 3,
   "name": "Udemy Reset",
-  "permissions": ["activeTab", "scripting", "storage"],
+  "permissions": ["activeTab", "scripting"],
   "version": "1.0"
 }
