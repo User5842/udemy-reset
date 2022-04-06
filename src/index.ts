@@ -1,23 +1,28 @@
+import "animate.css";
 import "./styles/index.css";
 import { udemyPage } from "./utils/constants";
 
 const resetProgress = document.getElementById("reset") as HTMLButtonElement;
 
-resetProgress.addEventListener("click", () => {
-  chrome.tabs
-    .query({ active: true, currentWindow: true })
-    .then(([tab]) => tab.id as number)
-    .then((tabId) => {
-      chrome.scripting
-        .executeScript({
-          target: { tabId },
-          func: resetUdemyCurriculumProgress,
-        })
-        .catch((error) => {
-          throw error;
-        });
-    })
-    .catch(console.error);
+resetProgress.addEventListener("click", async () => {
+  resetProgress.classList.toggle("animate__heartBeat");
+
+  try {
+    const [tab] = await chrome.tabs.query({
+      active: true,
+      currentWindow: true,
+    });
+    const tabId = tab.id as number;
+
+    await chrome.scripting.executeScript({
+      target: { tabId },
+      func: resetUdemyCurriculumProgress,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+
+  resetProgress.classList.toggle("animate__heartBeat");
 });
 
 function resetUdemyCurriculumProgress() {
