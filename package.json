@@ -7,7 +7,8 @@
     "build": "npm run lint && webpack --mode production && npm run copy",
     "commit": "cz",
     "copy": "copyfiles -u 1 ./src/manifest.json ./src/images/*.ico ./dist",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "release": "standard-version"
   },
   "keywords": [],
   "author": "Rafael Negron",
@@ -27,6 +28,7 @@
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.0",
     "postcss-loader": "^6.2.1",
+    "standard-version": "^9.5.0",
     "ts-loader": "^9.2.8",
     "typescript": "^4.6.3",
     "webpack": "^5.71.0",
